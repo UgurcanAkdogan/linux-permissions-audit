@@ -23,7 +23,7 @@ cd projects
 ls -la
 ```
 
-I checked the 10-character permission strings (for example `-rw-rw-rw-`) to find access that should not be there.
+I checked the 10-character permission strings to find access that should not be there.
 
 ### 2. Remove write access for "others"
 
@@ -53,7 +53,7 @@ I removed execute permission from the group on the `drafts` directory, which sto
 chmod g-x drafts
 ```
 
-**Result:** only the owner can access the directory contents.
+**Result:** group members can no longer enter the directory or reach its contents.
 
 ## Quick Reference
 
