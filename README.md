@@ -1,60 +1,80 @@
-# linux-permissions-audit
-Audit and management of Linux file permissions to implement the principle of least privilege as part of the Google Cybersecurity Professional Certificate.
-Linux File Permissions Audit
-Project Description
+# Linux File Permissions Audit
 
-In this project, I performed a security audit on a Linux system to manage file and directory permissions. The primary goal was to implement the Principle of Least Privilege (PoLP), ensuring that users and groups have only the access necessary for their specific roles, thereby reducing the system's attack surface.
-Lab Environment
+> Part of my Google Cybersecurity Professional Certificate portfolio (Coursera lab environment).
 
-    Platform: Google Cybersecurity Professional Certificate (Coursera)
+## Project Description
 
-    Operating System: Linux (Bash Shell)
+In this project I audited file and directory permissions on a Linux system. The goal was to apply the **Principle of Least Privilege (PoLP)**: users and groups get only the access their role needs, which reduces the system's attack surface.
 
-    Key Tools: chmod, ls -la, cd
+## Lab Environment
 
-🛠️ Step-by-Step Security Audit
-1. Initial Inspection of Permissions
+- **Platform:** Google Cybersecurity Professional Certificate (Coursera)
+- **Operating system:** Linux (Bash shell)
+- **Key commands:** `ls -la`, `chmod`, `cd`
 
-I navigated to the projects directory and listed all files, including hidden ones, to audit the current permission strings.
-Bash
+## Step-by-Step Security Audit
 
+### 1. Inspect the current permissions
+
+I moved into the `projects` directory and listed everything, hidden files included, to read each file's permission string.
+
+```bash
 cd projects
 ls -la
+```
 
-    Action: Investigated the 10-character permission strings to identify unauthorized access.
+I checked the 10-character permission strings (for example `-rw-rw-rw-`) to find access that should not be there.
 
-2. Modifying File Permissions
+### 2. Remove write access for "others"
 
-I identified that project_x.txt allowed "others" to have write access. I removed this permission to prevent unauthorized modifications.
+`project_x.txt` allowed the *other* class to write to it. I removed that permission to prevent unauthorized changes.
 
-    Command: chmod o-w project_x.txt
+```bash
+chmod o-w project_x.txt
+```
 
-    Result: Successfully removed write access for the "other" group.
+**Result:** write access removed for the "other" class.
 
-3. Securing Hidden Files
+### 3. Secure a hidden file
 
-Hidden files often contain sensitive data. I audited .project_x.txt and removed write permissions for both the user and the group to make it "read-only."
+Hidden files often hold sensitive data. I made `.project_x.txt` read-only by removing write permission for both the user and the group.
 
-    Command: chmod ug-w .project_x.txt
+```bash
+chmod ug-w .project_x.txt
+```
 
-    Result: Hardened the hidden file against accidental or malicious changes.
+**Result:** the file is protected against accidental or malicious changes.
 
-4. Restricting Directory Access
+### 4. Restrict directory access
 
-I modified the permissions of the drafts directory to prevent group members from entering or executing files within it.
+I removed execute permission from the group on the `drafts` directory, which stops group members from entering it or running files inside.
 
-    Command: chmod g-x drafts
+```bash
+chmod g-x drafts
+```
 
-    Result: Removed the "execute" (x) bit, effectively blocking group access to the directory contents.
+**Result:** only the owner can access the directory contents.
 
-🎯 Key Takeaways
+## Quick Reference
 
-    System Hardening: Reducing file permissions is a critical step in securing a Linux environment.
+| Symbol | Meaning |
+| --- | --- |
+| `u`, `g`, `o` | user (owner), group, others |
+| `+` / `-` | add / remove a permission |
+| `r`, `w`, `x` | read, write, execute |
 
-    Granular Control: Practiced using chmod with symbolic links (u, g, o) to manage specific access levels.
+## Key Takeaways
 
-    Audit Methodology: Learned how to use ls -la to identify hidden security risks in the file system.
+- **System hardening:** reducing permissions is a core step in securing a Linux environment.
+- **Granular control:** I practiced `chmod` with symbolic mode (`u`, `g`, `o`) to change specific access levels.
+- **Audit method:** `ls -la` reveals hidden files and permission risks.
 
-👤 About the Author
+## Repository Contents
 
-I am Uğurcan, an aspiring Cybersecurity Professional and SOC Analyst. I am currently focusing on Linux security, system hardening, and threat detection.
+| File | Description |
+| --- | --- |
+| [`Ugurcan_Akdogan_Linux_Permissions_Audit.pdf`](Ugurcan_Akdogan_Linux_Permissions_Audit.pdf) | Full audit write-up |
+
+## About the Author
+
+I am Uğurcan, an aspiring cybersecurity professional and SOC analyst focusing on Linux security, system hardening, and threat detection.
