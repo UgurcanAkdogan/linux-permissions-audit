@@ -77,4 +77,4 @@ chmod g-x drafts
 
 ## About the Author
 
-I am Uğurcan, an aspiring cybersecurity professional and SOC analyst focusing on Linux security, system hardening, and threat detection.
+I am Uğurcan, an aspiring penetration tester. Linux security and system hardening are part of my foundation: knowing how a system is locked down helps me understand how it can be attacked.
